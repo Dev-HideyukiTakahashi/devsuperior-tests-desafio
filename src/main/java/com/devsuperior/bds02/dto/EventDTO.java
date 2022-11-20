@@ -2,7 +2,9 @@ package com.devsuperior.bds02.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Optional;
 
+import com.devsuperior.bds02.entities.City;
 import com.devsuperior.bds02.entities.Event;
 
 public class EventDTO implements Serializable {
@@ -71,5 +73,13 @@ public class EventDTO implements Serializable {
 
 	public void setCityId(Long cityId) {
 		this.cityId = cityId;
+	}
+
+	public static Event toEvent(EventDTO dto, Event event) {
+		event.setName(dto.getName());
+		event.setDate(dto.getDate());
+		event.setUrl(dto.getUrl());
+		event.setCity(new City(dto.getCityId(), null));
+		return event;
 	}
 }
